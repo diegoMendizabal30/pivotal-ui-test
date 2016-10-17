@@ -4,6 +4,7 @@ import java.util.Map;
 
 import cucumber.api.java.en.When;
 
+import org.fundacionjala.pivotaluitest.api.Mapper;
 import org.fundacionjala.pivotaluitest.ui.pages.Dashboard;
 import org.fundacionjala.pivotaluitest.ui.pages.account.Account;
 import org.fundacionjala.pivotaluitest.ui.pages.account.ManageAccount;
@@ -63,6 +64,17 @@ public class ProjectStep {
         ManageAccount manageAccount = account.createAccount(accountName);
         manageAccount.waitPage();
         CommonNavigator.goToDashboard();
+    }
+
+    /**
+     * this methos update the task.
+     *
+     * @param projectCreated String the old task.
+     * @param textForUpdate  String whit the new task.
+     */
+    @When("^I update the project (.*) for: (.*)$")
+    public void updateTheProject(final String projectCreated, final String textForUpdate) {
+        String oldTaskText = Mapper.mapEndpoint(projectCreated);
     }
 
     /**
