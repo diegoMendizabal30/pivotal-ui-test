@@ -48,6 +48,5 @@ public class ProjectAssert {
     public void verifyThatANewProjectIsDisplayedInDashboard() {
         Dashboard dashboard = new Dashboard();
         assertTrue(dashboard.existProject(projectId));
-
     }
 }

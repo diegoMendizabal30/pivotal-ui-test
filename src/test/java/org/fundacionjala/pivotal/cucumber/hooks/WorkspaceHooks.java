@@ -2,7 +2,6 @@ package org.fundacionjala.pivotal.cucumber.hooks;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import io.restassured.response.Response;
 import org.fundacionjala.pivotal.api.RequestManager;
 import org.fundacionjala.pivotal.cucumber.stepdefinition.ui.workspace.WorkspaceStepDef;
 import org.fundacionjala.pivotal.ui.pages.workspace.Workspace;
@@ -35,7 +34,7 @@ public class WorkspaceHooks {
     public void deleteWorkspace() {
         Workspace workspace = workspaceStepDef.getWorkspace();
         String endPointDeleteWorkspace = WORKSPACES_ENDPOINT.concat(workspace.getIdWorkspace());
-        Response response = RequestManager.delete(endPointDeleteWorkspace);
+        RequestManager.delete(endPointDeleteWorkspace);
     }
 
     /**

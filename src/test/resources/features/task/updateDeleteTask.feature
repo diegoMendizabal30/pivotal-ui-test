@@ -1,4 +1,4 @@
-Feature: Update item test
+Feature: Update and delete task
 
   Background: Preconditions for a task
     Given I send a POST request to /projects
@@ -6,7 +6,7 @@ Feature: Update item test
     And I expect the status code 200
     And I store as Project1
     And I send a POST request to /projects/[Project1.id]/stories
-      | name      | ATstory01 |
+      | name | ATstory01 |
     And I expect the status code 200
     And I store as Story1
     And I send a POST request to /projects/[Project1.id]/stories/[Story1.id]/tasks
@@ -14,7 +14,7 @@ Feature: Update item test
     And I expect the status code 200
     And I store as Tasks1
 
-   @toDashBoard @deleteAllProjects
+  @toDashBoard @deleteAllProjects
   Scenario: Update a task
     Given I select the project [Project1.name] and story [Story1.name] created
     When I update the task [Tasks1.description] for: The text is updated now
@@ -23,7 +23,7 @@ Feature: Update item test
   @deleteAllProjects @toDashBoard
   Scenario: Delete task
     Given I select the project [Project1.name] and story [Story1.name] created
-    When I delete the task: [Tasks1.description] pressing the delete button
+    When I delete the task: [Tasks1.description]
     Then The task: [Tasks1.description] is deleted
 
 

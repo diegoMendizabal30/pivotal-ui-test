@@ -1,12 +1,9 @@
 package org.fundacionjala.pivotal.ui.pages.common;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import org.fundacionjala.pivotal.ui.browser.DriverManager;
-import org.fundacionjala.pivotal.utils.Environment;
 
 /**
  * This is class wait to load the element.
@@ -17,18 +14,6 @@ public final class CommonActions {
      * Constructor private.
      */
     private CommonActions() {
-    }
-
-    /**
-     * This method waits the element.
-     *
-     * @param webElement Element to wait.
-     */
-    @Deprecated
-    public static void waitUntil(final WebElement webElement) {
-        final WebDriver driver = DriverManager.getInstance().getDriver();
-        final WebDriverWait wait = new WebDriverWait(driver, Environment.getInstance().getTimeout());
-        wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
     /**

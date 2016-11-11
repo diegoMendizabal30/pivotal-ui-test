@@ -68,7 +68,7 @@ public final class RequestManager {
      *
      * @param endPoint route of the endpoint.
      * @param body     data to be updated.
-     * @return the Response.
+     * @return {@link Response}
      */
     public static Response put(final String endPoint, final String body) {
         return given().spec(REQUEST_SPECIFICATION)
@@ -83,7 +83,7 @@ public final class RequestManager {
      *
      * @param endPoint route of the endpoint.
      * @param body     data to be updated.
-     * @return the Response.
+     * @return {@link Response}
      */
     public static Response put(final String endPoint, final Map<String, Object> body) {
         return given().spec(REQUEST_SPECIFICATION)

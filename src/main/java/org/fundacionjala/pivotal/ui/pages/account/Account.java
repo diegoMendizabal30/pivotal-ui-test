@@ -18,7 +18,6 @@ public class Account extends AbstractBasePage {
     @FindBy(id = "new_account_link")
     private WebElement createAccountButton;
 
-
     @FindBy(id = "add_account_button")
     private WebElement addAccountButton;
 

@@ -99,7 +99,7 @@ public class ResourcesSteps {
      *
      * @return the responseList.
      */
-    public List<Response> getResponseList() {
+    List<Response> getResponseList() {
         return responseList;
     }
 }

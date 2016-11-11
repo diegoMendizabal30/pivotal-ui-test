@@ -19,7 +19,7 @@
     },
     "loggers": {
       "logger": {
-        "name": "org.fundacionjala.pivotaluitest",
+        "name": "org.fundacionjala.pivotal",
         "level": "ALL",
         "additivity": "false",
         "AppenderRef": {

@@ -2,11 +2,11 @@ Feature: Task item test
 
   Background: Preconditions for a task
     Given I send a POST request to /projects
-      | name | ATProjectForPivotal |
+      | name | Automation Project Test 01 |
     And I expect the status code 200
     And I store as Project
     And I send a POST request to /projects/[Project.id]/stories
-      | name | ATstory01 |
+      | name | Automation Story Test 01 |
     And I expect the status code 200
     And I store as Story
 

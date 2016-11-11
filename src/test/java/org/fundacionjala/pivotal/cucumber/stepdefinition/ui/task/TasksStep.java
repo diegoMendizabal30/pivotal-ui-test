@@ -3,7 +3,6 @@ package org.fundacionjala.pivotal.cucumber.stepdefinition.ui.task;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.fundacionjala.pivotal.api.Mapper;
-import org.fundacionjala.pivotal.ui.browser.DriverManager;
 import org.fundacionjala.pivotal.ui.pages.Dashboard;
 import org.fundacionjala.pivotal.ui.pages.StoryDashBoard;
 
@@ -14,17 +13,16 @@ import org.fundacionjala.pivotal.ui.pages.StoryDashBoard;
 public class TasksStep {
 
     /**
-     * Go to the project DashBoard.
+     * Go to the project DashBoard and expand story.
      *
      * @param projectName String of the name of the project.
      * @param storyName   String of the name of the story.
      */
     @Given("^I select the project (.*) and story (.*) created$")
-    public void iGoToTheProjectProjectNameAndStoryStoryNameCreated(final String projectName, final String storyName) {
+    public void iGoToTheProjectNameAndStoryNameCreated(final String projectName, final String storyName) {
+        Dashboard dashboard = new Dashboard();
         String project = Mapper.mapEndpoint(projectName);
         String story = Mapper.mapEndpoint(storyName);
-        Dashboard dashboard = new Dashboard();
-        DriverManager.getInstance().getDriver().navigate().refresh();
         StoryDashBoard projectDashboard = dashboard.projectsList(project);
         projectDashboard.clickForStoryDeploy(story);
     }
@@ -41,7 +39,7 @@ public class TasksStep {
     }
 
     /**
-     * this methos update the task.
+     * this method update the task.
      *
      * @param taskCreated   String the old task.
      * @param textForUpdate String whit the new task.
@@ -58,8 +56,8 @@ public class TasksStep {
      *
      * @param taskCreated String whit the task tah will be deleted.
      */
-    @When("^I delete the task: (.*) pressing the delete button$")
-    public void iDeleteTheTaskDescriptionPressingTheDeleteButton(final String taskCreated) {
+    @When("^I delete the task: (.*)$")
+    public void iDeleteTheTaskDescription(final String taskCreated) {
         StoryDashBoard storyDashBoard = new StoryDashBoard();
         storyDashBoard.deleteTask(taskCreated);
     }

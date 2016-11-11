@@ -65,7 +65,7 @@ public class ProjectForm extends AbstractBasePage {
     /**
      * This method click on the new project button.
      *
-     * @return Project Management page.
+     * @return {@link ProjectManagement}
      */
     public ProjectManagement clickCreateProjectButton() {
         CommonActions.clickElement(createButton);
@@ -73,7 +73,7 @@ public class ProjectForm extends AbstractBasePage {
     }
 
     /**
-     * This method selected project privacy.
+     * This method selected privacy project.
      *
      * @param projectPrivacyType return project privacy type.
      */

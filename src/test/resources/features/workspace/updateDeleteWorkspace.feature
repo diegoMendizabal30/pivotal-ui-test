@@ -17,9 +17,8 @@ Feature: Delete and Edit a Workspace.
     And I click on Delete link and confirm
     Then I expect the next message: [Workspace1.name] was successfully deleted.
 
-
   @DeleteWorkspace
-  Scenario: Edit Name Workspace.
+  Scenario: Edit Workspace.
     When I go to the [Workspace1.name]
     And I click in the settings tab
     And I edit the name with
