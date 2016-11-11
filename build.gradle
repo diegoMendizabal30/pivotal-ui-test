@@ -1,10 +1,11 @@
 import net.masterthought.cucumber.ReportBuilder
 
-group 'org.fundacionjala.pivotaluitest'
+group 'org.fundacionjala.pivotal'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
+//apply plugin: 'pmd'
 apply plugin: 'checkstyle'
 checkstyle {
     toolVersion = "6.1.1"
@@ -22,25 +23,19 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.masterthought:cucumber-reporting:2.5.0'
+        classpath 'net.masterthought:cucumber-reporting:3.2.0'
     }
 }
 
 dependencies {
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.1'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.0.1'
     compile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.1'
     compile group: 'io.rest-assured', name: 'json-schema-validator', version: '3.0.1'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.3'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.3'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.8.3'
-    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
 
-    testCompile group: 'info.cukes', name: 'cucumber-java', version: '1.2.4'
-    testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.4'
-    testCompile group: 'info.cukes', name: 'cucumber-picocontainer', version: '1.2.4'
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
+    testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
+    testCompile group: 'info.cukes', name: 'cucumber-picocontainer', version: '1.2.5'
 }
 
 task executeFeatures() {
@@ -56,9 +51,25 @@ task executeFeatures() {
                         '--plugin', 'html:build/cucumber-html-report',
                         '--plugin', 'json:build/cucumber.json',
                         '--plugin', 'rerun:build/rerun.txt',
-                        '--glue', 'org.fundacionjala.dashboard', 'src/test/resources/features']
+                        '--glue', 'org.fundacionjala.pivotal','src/test/resources/features']
+                // execution by feature folders
+                //splitFeatureFolders(featureFolders).each { String item -> args += [item] }
+                jvmArgs = ["-DauthenticationBrowser=" + authenticationBrowser]
                 jvmArgs = ["-Dtoken=" + token]
                 jvmArgs = ["-Dproxy=" + proxy]
+                jvmArgs = ["-DprimaryAuthenticationUser=" + primaryAuthenticationUser]
+                jvmArgs = ["-DprimaryAuthenticationPassword=" + primaryAuthenticationPassword]
+                jvmArgs = ["-DbrowserStackUser=" + browserStackUser]
+                jvmArgs = ["-DbrowserStackKey=" + browserStackKey]
+                jvmArgs = ["-DbrowserstackDebug=" + browserstackDebug]
+                jvmArgs = ["-Dbrowser=" + browser]
+                jvmArgs = ["-Dbrowser_version=" + browser_version]
+                jvmArgs = ["-Dos_version=" + os_version]
+                jvmArgs = ["-Dresolution=" + resolution]
+                jvmArgs = ["-Dbuilded=" + builded]
+                jvmArgs = ["-Dos=" + os]
+                jvmArgs = ["-Dhost=" + host]
+                jvmArgs = ["-Dport=" + port]
             }
         } catch (Exception e) {
             //In order to avoid FAILURE: Build failed with an exception.
@@ -70,15 +81,23 @@ task executeFeatures() {
 }
 
 test {
-    exclude 'org/fundacionjala/pivotaluitest/**'
+    exclude 'org/fundacionjala/pivotal/**'
 }
 
 def static generateReport(String pathCucumber, String pathReport) {
     File reportOutputDirectory = new File(pathReport)
     List<String> jsonReportFiles = new ArrayList<>()
     jsonReportFiles.add(pathCucumber)
-    String buildProjectName = "pivotal-ui-test"
+    String buildProjectName = "pivotaluitest"
     net.masterthought.cucumber.Configuration configuration = new net.masterthought.cucumber.Configuration(reportOutputDirectory, buildProjectName)
     ReportBuilder reportBuilder = new ReportBuilder(jsonReportFiles, configuration)
     reportBuilder.generateReports()
+}
+
+def static List<String> splitFeatureFolders(String featureFolders) {
+    def featureBasePath = "src/test/resources/features/"
+    String[] listFeatureFolders = featureFolders.split(",")
+    List<String> listFeaturesPath = featureFolders.split(",")
+    listFeatureFolders.each { String item -> listFeaturesPath.add(featureBasePath + item.trim()) }
+    return listFeaturesPath;
 }
