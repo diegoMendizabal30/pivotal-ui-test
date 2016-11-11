@@ -77,7 +77,7 @@ def static generateReport(String pathCucumber, String pathReport) {
     File reportOutputDirectory = new File(pathReport)
     List<String> jsonReportFiles = new ArrayList<>()
     jsonReportFiles.add(pathCucumber)
-    String buildProjectName = "pivotal-api-test"
+    String buildProjectName = "pivotal-ui-test"
     net.masterthought.cucumber.Configuration configuration = new net.masterthought.cucumber.Configuration(reportOutputDirectory, buildProjectName)
     ReportBuilder reportBuilder = new ReportBuilder(jsonReportFiles, configuration)
     reportBuilder.generateReports()

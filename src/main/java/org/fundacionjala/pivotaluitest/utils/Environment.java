@@ -6,8 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This class is in charge to set the default  parameters to
@@ -70,7 +70,7 @@ public final class Environment {
      * Get the properties of the file.
      *
      * @param env string name of property setting.
-     * @return String that is a property
+     * @return String that is a property.
      */
     private String getEnv(final String env) {
         String property = System.getProperty(env);
@@ -128,7 +128,7 @@ public final class Environment {
     /**
      * Return the user name.
      *
-     * @return String whit the name user
+     * @return String whit the name user.
      */
     public String getPrimaryUser() {
         return getEnv(PRIMARY_AUTHENTICATION_USER);
@@ -137,7 +137,7 @@ public final class Environment {
     /**
      * return the password.
      *
-     * @return String whit the password
+     * @return String whit the password.
      */
     public String getPrimaryPassword() {
         return getEnv(PRIMARY_AUTHENTICATION_PASS);
